@@ -61,6 +61,8 @@ See the example file included for a demo. Styles and image sizes may need to be 
 
 Works best with more items in the list - 7 at least. Currently a bug if there are less than 5 items, fix coming soon.
 
+Captions are optional, just leave them out of the markup if not needed.
+
 The animation speed is set in two places - the JavaScript and the CSS. There's a variable in the less called @spinnertrans to make changing this easier.
 
 Code needs some refinement still.

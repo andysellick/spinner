@@ -82,13 +82,13 @@
                 //create navigation controls
                 var $navbar = $('<div/>').addClass('spinnernav').appendTo(this.$elem);
                 if(this.settings.nav){
-                    var $ctlprev = $('<a/>').addClass('js-control next active').html(this.settings.navPrevText).attr('data-dir','prev').attr('title',this.settings.navPrevText).appendTo($navbar);
+                    $('<a/>').addClass('js-control next active').html(this.settings.navPrevText).attr('data-dir','prev').attr('title',this.settings.navPrevText).appendTo($navbar);
                 }
                 if(this.settings.linkBtn){
-                    var $linkbtn = $('<a/>').addClass('action').addClass(this.settings.linkBtnClass).html(this.settings.linkBtnText).attr('href',this.$elem.find('.middle > a').attr('href')).appendTo($navbar);
+                    $('<a/>').addClass('action').addClass(this.settings.linkBtnClass).html(this.settings.linkBtnText).attr('href',this.$elem.find('.middle > a').attr('href')).appendTo($navbar);
                 }
                 if(this.settings.nav){
-                    var $ctlnext = $('<a/>').addClass('js-control prev active').html(this.settings.navNextText).attr('data-dir','next').attr('title',this.settings.navNextText).appendTo($navbar);
+                    $('<a/>').addClass('js-control prev active').html(this.settings.navNextText).attr('data-dir','next').attr('title',this.settings.navNextText).appendTo($navbar);
                 }
                 
                 var leftpos = 0;
@@ -101,7 +101,7 @@
                 var slidewidth = (55 + (incrementby * (middle - 1))) / middle; //slides should occupy x% of the space either side, main slide overlaps from e.g. 30% to 70%
                 
                 $spinner.find('.left').each(function(){
-                    Plugin.prototype.setupAttributes($(this),leftpos,toppos,slidewidth,zindex);
+                    thisobj.setupAttributes($(this),leftpos,toppos,slidewidth,zindex);
                     leftpos += incrementby;
                     toppos += incrementby;
                     zindex += (1 * zindexinc);
@@ -113,7 +113,7 @@
                 leftpos = 100 - leftpos - (slidewidth - incrementby); //okay that was complex
 
                 $spinner.find('.right').each(function(){
-                    Plugin.prototype.setupAttributes($(this),leftpos,toppos,slidewidth,zindex);
+                    thisobj.setupAttributes($(this),leftpos,toppos,slidewidth,zindex);
                     leftpos += incrementby;
                     toppos -= incrementby;
                     zindex -= (1 * zindexinc);
@@ -222,8 +222,6 @@
         animateSlide: function(loop,dir,zindexinc){
             var $spinner = this.$elem.find('.spinner');
             var $loopeditems = $spinner.find('li');
-            var count = $loopeditems.length;
-            //var middle = Math.floor(count / 2);
 
             //quick hack to fix the z-index for elements passing along the back
             if(dir == 'next'){ //left most element will move along the back to become right most element
@@ -279,7 +277,7 @@
 
                 $(this).attr('data-pos',thispos);
                 thisobj.hackZindexes();
-                
+
                 $(this).attr('class',targetclass).animate({
                     'left': targetleft,
                     'top': targettop,
