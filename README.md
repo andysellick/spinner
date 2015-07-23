@@ -41,7 +41,7 @@ See the example file included for a demo. Styles and image sizes may need to be 
 
 **spinnerheight**: number, the height of the carousel, defaults to 0, which calculates the height automatically
 
-**animspeed**: number, speed of animation, defaults to 500 milliseconds
+**animspeed**: number, speed of animation, defaults to 500 milliseconds - note that CSS will need updating as well, see below.
 
 **disableat**: number, window size below which to turn off the plugin and revert to mobile styles
 
@@ -57,3 +57,10 @@ See the example file included for a demo. Styles and image sizes may need to be 
 
 **navPrevText**: string, text for the 'previous' button
 
+##Notes
+
+Works best with more items in the list - 7 at least. Currently a bug if there are less than 5 items, fix coming soon.
+
+The animation speed is set in two places - the JavaScript and the CSS. There's a variable in the less called @spinnertrans to make changing this easier.
+
+Code needs some refinement still.

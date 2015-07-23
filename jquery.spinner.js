@@ -70,7 +70,7 @@
                     $(this).find('img').addClass('image');
                 
                     //create array of ideal zindexes for later use
-                    if(counter < (count / 2)){
+                    if(counter <= (count / 2)){
                         thisobj.zindexes[counter] = initialz * (counter + 1);
                     }
                     else {
@@ -122,7 +122,7 @@
                 $spinner.find('.middle').css({
                     'top': 0,
                     'left': spaceonsides + '%',
-                    'z-index': middlez, //((count + 2) / 2) * zindexinc,
+                    'z-index': middlez,
                     'width': this.settings.middleslidewidth + '%'
                 });
                 
@@ -223,39 +223,32 @@
             var $spinner = this.$elem.find('.spinner');
             var $loopeditems = $spinner.find('li');
             var count = $loopeditems.length;
-            var middle = Math.floor(count / 2);
+            //var middle = Math.floor(count / 2);
 
             //quick hack to fix the z-index for elements passing along the back
             if(dir == 'next'){ //left most element will move along the back to become right most element
                 $loopeditems = $($spinner.find('li').get().reverse()); //we want to loop through all the items in reverse, so the 'next' one is actually the next one
             }
             var thisobj = this;
-            var looponce = 1;
+            var firstloop = 1;
             //annoyingly we can't use $items here because by the time we've finished this, it is no longer accurate
             $loopeditems.each(function(){
-                if(looponce){
-                    looponce = 0; //only do this the first time
-                    //now reshuffle the elements
+                var targetitem;
+                var thispos = 0;
+
+                //reshuffle the elements, only do this the first time
+                if(firstloop){
+                    firstloop = 0;
                     if(dir == 'next'){
-                        var tmpobj = $spinner.find('li').first();
-                        tmpobj.appendTo($spinner);
+                        $spinner.find('li').first().appendTo($spinner);
                     }
                     else {
-                        var tmpobj = $spinner.find('li').last();
-                        tmpobj.prependTo($spinner);
+                        $spinner.find('li').last().prependTo($spinner);
                     }
                 }
 
-                var thispos = 0;
                 if(dir == 'next'){
                     thispos = $loopeditems.length - $(this).index() - 1;
-                }
-                else {
-                    thispos = $(this).index();
-                }
-                var targetitem;
-
-                if(dir == 'next'){
                     if(thispos < $loopeditems.length - 1){
                         targetitem = $(this).prev();
                     }
@@ -264,6 +257,7 @@
                     }
                 }
                 else {
+                    thispos = $(this).index();
                     if(thispos < $loopeditems.length - 1){
                         targetitem = $(this).next();
                     }
@@ -271,7 +265,7 @@
                         targetitem = $spinner.find('li').first();
                     }
                 }
-                
+
                 //now update the visual appearance and position
                 var targetclass = targetitem.attr('class');
                 var targetleft = targetitem.css('left');
