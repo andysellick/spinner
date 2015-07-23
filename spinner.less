@@ -1,0 +1,166 @@
+    .transition( @trans ){
+        transition: @trans;
+        -moz-transition: @trans;
+        -webkit-transition: @trans;
+        -o-transition: @trans;
+    }
+    .transparency( @trans ){
+        @mstrans: @trans * 100;
+        filter: alpha(opacity=@mstrans);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="@mstrans")"; /* IE 8 */
+        -moz-opacity: @trans; /* Netscape */
+        -khtml-opacity: @trans; /* Safari 1.x */
+        opacity: @trans; /* Good browsers */
+    }
+	.transform-spinner ( @trans, @rotate ){
+        transform: perspective(@trans) rotateY(@rotate);
+        ms-transform: ms-perspective(@trans) rotateY(@rotate);
+        -moz-tranform: -moz-perspective(@trans) rotateY(@rotate);
+        -webkit-transform: -webkit-perspective(@trans) rotateY(@rotate);
+        -o-transform: -o-perspective(@trans) rotateY(@rotate);
+    }
+    /* some quick resetting */
+    ul,li,a,span {
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+    img {
+        max-width:100%;
+    }
+    
+    @spinnertrans: 0.5s;
+
+    /* 3d carousel */
+    .spinnerwrapper {
+        padding:0 10px; //need to account for the slight bleed caused by perspective transforms
+        margin-bottom:2em;
+        -webkit-tap-highlight-color: rgba(0,0,0,0); //remove tap highlighting on ipad
+
+        .spinner {
+            /* active, desktop view */
+            &.active {
+                position:relative;
+
+                > li {
+                    position:absolute;
+                    z-index:1;
+                    overflow:visible !important; //seems to be the only way to guarantee skewed images aren't cropped
+                    margin:0;
+                    .transition( z-index @spinnertrans );
+
+                    .mask {
+                        position:absolute;
+                        top:0;
+                        bottom:0;
+                        left:0;
+                        right:0;
+                        background:#FFFFFF;
+                        .transparency( 0.4 );
+                        cursor:pointer;
+                        .transition( all @spinnertrans );
+                    }
+                    .image {
+                        border:0; //internet explorer adds one automatically
+                        .transition( all @spinnertrans );
+                    }
+                    .title {
+                        position:absolute;
+                        left:0;
+                        width:100%;
+                        top:100%;
+                        margin-top:0.2em;
+                        font-size:1.1em;
+                        font-weight:bold;
+                        .transition( all @spinnertrans );
+                        text-align:center;
+                    }
+                    .btn {
+                        display:none;
+                    }
+
+                    &.left {
+                        text-align:left;
+                        .image,
+                        .mask {
+                            .transform-spinner( 300px, 15deg );
+                        }
+                        .title {
+                            left:-10%;
+                            width:50%;
+                            margin-top:1em;
+                        }
+                    }
+                    &.right {
+                        text-align:right;
+                        .image,
+                        .mask {
+                            .transform-spinner( 300px, -15deg );
+                        }
+                        .title {
+                            left:60%;
+                            width:50%;
+                            margin-top:1em;
+                        }
+                    }
+                    &.middle {
+                        z-index:2;
+                        .mask {
+                            .transparency( 0 );
+                            .transform-spinner( 0px, 0deg );
+                            z-index:-1;
+                        }
+                        .title {
+                            //margin-bottom:0.4em;
+                            font-size:2em;
+                        }
+                        .action {
+                            .transparency( 1 );
+                        }
+                    }
+                }
+            }
+            /* stacked, mobile view */
+            > li {
+                position:relative;
+                margin-bottom:2em;
+
+                .title {
+                    position:absolute;
+                    left:auto;
+                    top:auto;
+                    color:#333333;
+                    font-size:1.6em;
+                }
+                .btn {
+                    position:absolute;
+                    right:0;
+                    bottom:0;
+                }
+                img {
+                    display:block;
+                    margin:0 auto;
+                }
+            }
+        }
+        
+        .spinnernav {
+            margin-top:50px;
+            position:relative;
+            text-align:center;
+            .action {
+                //margin:0 15%;
+            }
+            .next,
+            .prev {
+                position:absolute;
+                top:0;
+                left:0;
+                cursor:pointer;
+            }
+            .prev {
+                left:auto;
+                right:0;
+            }
+        }
+    }
