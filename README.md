@@ -20,7 +20,6 @@ See the example file included for a demo. Styles and image sizes may need to be 
             <a href="http://somewhere">
                 <img src="img/image.png" alt=""/>
                 <span class="title">Title</span>
-                <span class="btn">View</span>
             </a>
         </li>
         
@@ -64,5 +63,7 @@ Works best with more items in the list - 7 at least. Currently a bug if there ar
 Captions are optional, just leave them out of the markup if not needed.
 
 The animation speed is set in two places - the JavaScript and the CSS. There's a variable in the less called @spinnertrans to make changing this easier.
+
+Since the angling of the pictures is achieved using CSS transforms, the carousel will appear flat in IE9 and below. But it should still work.
 
 Code needs some refinement still.

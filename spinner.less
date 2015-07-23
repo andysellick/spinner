@@ -1,3 +1,4 @@
+    /* mixins */
     .transition( @trans ){
         transition: @trans;
         -moz-transition: @trans;
@@ -14,7 +15,7 @@
     }
 	.transform-spinner ( @trans, @rotate ){
         transform: perspective(@trans) rotateY(@rotate);
-        ms-transform: ms-perspective(@trans) rotateY(@rotate);
+        -ms-transform: ms-perspective(@trans) rotateY(@rotate);
         -moz-tranform: -moz-perspective(@trans) rotateY(@rotate);
         -webkit-transform: -webkit-perspective(@trans) rotateY(@rotate);
         -o-transform: -o-perspective(@trans) rotateY(@rotate);
@@ -75,9 +76,6 @@
                         .transition( all @spinnertrans );
                         text-align:center;
                     }
-                    .btn {
-                        display:none;
-                    }
 
                     &.left {
                         text-align:left;
@@ -132,11 +130,6 @@
                     color:#333333;
                     font-size:1.6em;
                 }
-                .btn {
-                    position:absolute;
-                    right:0;
-                    bottom:0;
-                }
                 img {
                     display:block;
                     margin:0 auto;
@@ -144,6 +137,7 @@
             }
         }
         
+        /* navigation controls, optional */
         .spinnernav {
             margin-top:50px;
             position:relative;
