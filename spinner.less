@@ -1,4 +1,11 @@
     /* mixins */
+	.transform ( @trans ){
+        transform: @trans;
+        -ms-transform: @trans;
+        -moz-tranform: @trans;
+        -webkit-transform: @trans;
+        -o-transform: @trans;
+    }
     .transition( @trans ){
         transition: @trans;
         -moz-transition: @trans;
@@ -64,6 +71,7 @@
                     .image {
                         border:0; //internet explorer adds one automatically
                         .transition( all @spinnertrans );
+                        .transform(scale(1)); //fixes issue with chrome
                     }
                     .title {
                         position:absolute;
