@@ -67,3 +67,6 @@ The animation speed is set in two places - the JavaScript and the CSS. There's a
 Since the angling of the pictures is achieved using CSS transforms, the carousel will appear flat in IE9 and below. But it should still work.
 
 Code needs some refinement still.
+
+Demo at http://www.custarddoughnuts.co.uk/article/2015/9/13/yet-another-plugin-3d-carousel
+
